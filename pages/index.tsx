@@ -1,13 +1,12 @@
-// Modules
 import { NextPage } from 'next/types';
 
-import { Button } from '@material-ui/core';
+import Layout from '../src/components/Layout';
 
 const HomePage: NextPage = () => {
 	return (
-		<h1>
-			<Button>Hello!</Button>
-		</h1>
+		<Layout>
+			<h1>This is homepage!</h1>
+		</Layout>
 	);
 };
 
