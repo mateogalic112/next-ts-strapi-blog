@@ -1,8 +1,10 @@
+import Layout from '../src/components/Layout';
+
 const AboutPage: React.FC = () => {
 	return (
-		<div>
+		<Layout>
 			<h1>This is about page</h1>
-		</div>
+		</Layout>
 	);
 };
 
