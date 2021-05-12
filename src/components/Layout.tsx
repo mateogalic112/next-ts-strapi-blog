@@ -1,16 +1,9 @@
 import Head from 'next/head';
 
-import theme from '../../utils/theme';
-import { makeStyles } from '@material-ui/core/styles';
-
 import { Container } from '@material-ui/core';
 import Header from './Header';
-
-const useStyles = makeStyles({
-	container: {
-		backgroundColor: `${theme.palette.neutral.main}`,
-	},
-});
+import Footer from './Footer';
+import Showcase from './Showcase';
 
 interface LayoutProps {
 	title?: string;
@@ -19,8 +12,6 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ title, keywords, description, children }) => {
-	const classes = useStyles();
-
 	return (
 		<>
 			<Head>
@@ -29,9 +20,11 @@ const Layout: React.FC<LayoutProps> = ({ title, keywords, description, children 
 				<meta name="keywords" content={keywords} />
 			</Head>
 			<Header />
-			<Container className={classes.container}>
+			<Showcase />
+			<Container>
 				<div>{children}</div>
 			</Container>
+			<Footer />
 		</>
 	);
 };
