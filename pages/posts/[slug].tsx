@@ -12,7 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
-	heroWrapper: { position: 'relative', width: '100%', height: 500, paddingBottom: '20%' },
+	heroWrapper: { position: 'relative', width: '100%', minHeight: '50vh', paddingBottom: '20%' },
+	container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
 });
 
 interface SinglePostProps {
@@ -26,7 +27,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ post }) => {
 			<div className={classes.heroWrapper}>
 				<Image src={post.featured_image.formats.medium.url} layout="fill" objectFit="cover" />
 			</div>
-			<Container maxWidth="md">
+			<Container maxWidth="md" className={classes.container}>
 				<ReactMarkdown>{post.content}</ReactMarkdown>
 			</Container>
 		</Layout>

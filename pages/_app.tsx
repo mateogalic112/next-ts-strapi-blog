@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 
+import '../styles/globals.css';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../utils/theme';
