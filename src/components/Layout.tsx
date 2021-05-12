@@ -1,9 +1,7 @@
 import Head from 'next/head';
 
-import { Container } from '@material-ui/core';
 import Header from './Header';
 import Footer from './Footer';
-import Showcase from './Showcase';
 
 interface LayoutProps {
 	title?: string;
@@ -20,10 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ title, keywords, description, children 
 				<meta name="keywords" content={keywords} />
 			</Head>
 			<Header />
-			<Showcase />
-			<Container>
-				<div>{children}</div>
-			</Container>
+			{children}
 			<Footer />
 		</>
 	);

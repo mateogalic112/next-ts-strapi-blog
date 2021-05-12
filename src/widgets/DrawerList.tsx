@@ -29,8 +29,6 @@ const DrawerList: React.FC<DrawerListProps> = ({ toggleDrawer }) => {
 		<div className={classes.list} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
 			<List>
 				{NavList.map((item: NavListType) => {
-					console.log(<MailOutline />);
-
 					return (
 						<Link href={item.url} key={item.name}>
 							<ListItem button>
