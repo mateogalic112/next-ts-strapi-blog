@@ -30,6 +30,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts, children }) => {
 					))}
 				</Grid>
 			</Container>
+			<VerticalSpacer />
 		</Layout>
 	);
 };

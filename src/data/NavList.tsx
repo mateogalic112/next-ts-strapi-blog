@@ -1,9 +1,7 @@
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
-import StoreOutlinedIcon from '@material-ui/icons/StoreOutlined';
 import React from 'react';
 
 export type NavListType = {
@@ -19,19 +17,9 @@ const NavList: NavListType[] = [
 		url: '/',
 	},
 	{
-		name: 'About',
-		icon: <InfoOutlinedIcon />,
-		url: '/about',
-	},
-	{
 		name: 'Blog',
 		icon: <BookOutlinedIcon />,
 		url: '/posts',
-	},
-	{
-		name: 'Store',
-		icon: <StoreOutlinedIcon />,
-		url: '/store',
 	},
 ];
 
