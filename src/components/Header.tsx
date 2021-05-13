@@ -6,7 +6,7 @@ import AnimatedDrawer from '../widgets/AnimatedDrawer';
 import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AppBar, Toolbar, IconButton, Typography, Button, Container } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles({
@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 	},
 	title: {
 		flexGrow: 1,
+		fontSize: '1.5rem',
 	},
 });
 
@@ -61,9 +62,7 @@ const Header: React.FC = () => {
 							<AnimatedDrawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
 						</div>
 						<Link href="/">
-							<Typography variant="h6" className={classes.title}>
-								Matco
-							</Typography>
+							<a className={classes.title}>Matco</a>
 						</Link>
 						<Button color="inherit">Login</Button>
 					</Toolbar>
