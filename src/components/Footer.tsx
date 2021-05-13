@@ -21,12 +21,8 @@ const Footer = () => {
 	return (
 		<Box component="div" py={4} className={classes.root}>
 			<Container className={classes.container}>
-				<Typography gutterBottom paragraph variant="subtitle1">
-					Matco Corp &copy;
-				</Typography>
-				<Typography gutterBottom paragraph variant="body2">
-					All rights reserved {new Date().getFullYear()}.
-				</Typography>
+				<Typography variant="subtitle1">Matco Corp &copy;</Typography>
+				<Typography variant="body2">All rights reserved {new Date().getFullYear()}.</Typography>
 			</Container>
 		</Box>
 	);
