@@ -10,6 +10,7 @@ import Layout from '../../src/components/Layout';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
+import VerticalSpacer from '../../src/widgets/VerticalSpacer';
 
 const useStyles = makeStyles({
 	heroWrapper: { position: 'relative', width: '100%', minHeight: '50vh', paddingBottom: '20%' },
@@ -27,7 +28,8 @@ const SinglePost: React.FC<SinglePostProps> = ({ post }) => {
 			<div className={classes.heroWrapper}>
 				<Image src={post.featured_image.formats.medium.url} layout="fill" objectFit="cover" />
 			</div>
-			<Container maxWidth="md" className={classes.container}>
+			<VerticalSpacer />
+			<Container maxWidth="sm" className={classes.container} id="single-wrapper">
 				<ReactMarkdown>{post.content}</ReactMarkdown>
 			</Container>
 		</Layout>

@@ -39,3 +39,18 @@ blockquote p {
 	font-style: italic;
 	font-size: 1.25rem;
 }
+
+#single-wrapper p {
+	font-size: 1.125rem;
+	margin-bottom: 1.5rem;
+	letter-spacing: 0.25px;
+	line-height: 1.6;
+}
+
+#single-wrapper ul {
+	font-size: 1.125rem;
+	margin-bottom: 1.5rem;
+	letter-spacing: 0.25px;
+	line-height: 1.6;
+	align-self: flex-start;
+}
