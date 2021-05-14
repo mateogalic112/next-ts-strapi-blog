@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { GetServerSideProps } from 'next';
 import { Post } from '../models/Post';
@@ -12,18 +13,23 @@ import { API_URL } from '../config/index';
 import Layout from '../src/components/Layout';
 import FancyCard from '../src/components/FancyCard';
 import VerticalSpacer from '../src/widgets/VerticalSpacer';
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography, Button } from '@material-ui/core';
 
 interface SearchResults {
 	posts: Post[];
 }
 
 const Search: React.FC<SearchResults> = ({ posts }) => {
+	const router = useRouter();
+
 	return (
 		<Layout>
 			<Container>
 				<VerticalSpacer />
-				<Typography variant="h3">Search results</Typography>
+				<Button size="small" color="primary" onClick={() => router.back()}>
+					Go back
+				</Button>
+				<Typography variant="h4">Search results for "{router.query.term}"</Typography>
 				<VerticalSpacer />
 				<Grid container spacing={5}>
 					{posts.map((post) => (
@@ -47,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
 	const keyword = qs.stringify({
 		_where: {
-			_or: [{ title_contains: term }, { author_contains: term }],
+			_or: [{ title_contains: term }, { 'author.username_contains': term }],
 		},
 	});
 

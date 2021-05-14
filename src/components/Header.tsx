@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { AppBar, Toolbar, IconButton, Button, Container } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchBar from '../widgets/SearchBar';
 
 const useStyles = makeStyles({
 	root: {
@@ -64,6 +65,7 @@ const Header: React.FC = () => {
 						<Link href="/">
 							<a className={classes.title}>Matco</a>
 						</Link>
+						<SearchBar />
 						<Button color="inherit">Login</Button>
 					</Toolbar>
 				</Container>
