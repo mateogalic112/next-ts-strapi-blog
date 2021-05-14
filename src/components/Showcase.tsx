@@ -20,11 +20,13 @@ const useStyles = makeStyles({
 		marginRight: theme.spacing(1),
 	},
 	title: {
-		fontWeight: 500,
+		fontWeight: 600,
 		marginBottom: theme.spacing(2),
 	},
-	marginBottomLg: {
+	subtitle: {
+		width: '45ch',
 		marginBottom: theme.spacing(5),
+		fontWeight: 500,
 	},
 });
 
@@ -38,16 +40,16 @@ const Showcase = () => {
 					<Grid item xs={12} md={6}>
 						<Box display="flex" alignItems="center" mb={1}>
 							<VpnLockIcon color="primary" className={classes.marginRight} />
-							<Typography variant="caption" color="primary" className={classes.bold}>
+							<Typography variant="body1" color="primary" className={classes.bold}>
 								100% Trusted platform
 							</Typography>
 						</Box>
-						<Typography gutterBottom className={classes.title} variant="h3" color="secondary">
+						<Typography gutterBottom className={classes.title} variant="h2" color="secondary">
 							Latest Tech Skillset
 						</Typography>
-						<Typography gutterBottom className={classes.marginBottomLg} variant="subtitle1">
+						<Typography gutterBottom className={classes.subtitle} variant="subtitle1">
 							We work to understand your needs and are driven to ask better questions in the pursuit of
-							making work
+							making work.
 						</Typography>
 						<Button size="large" variant="contained" color="secondary">
 							Let's talk
