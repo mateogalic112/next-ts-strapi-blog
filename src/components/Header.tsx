@@ -2,13 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 
 import AnimatedDrawer from '../widgets/AnimatedDrawer';
+import SearchBar from '../widgets/SearchBar';
+
+import ModalComponent from '../components/ModalComponent';
 
 import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AppBar, Toolbar, IconButton, Button, Container } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Container, TextField } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchBar from '../widgets/SearchBar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles({
 	root: {
@@ -26,12 +29,24 @@ const useStyles = makeStyles({
 		flexGrow: 1,
 		fontSize: '1.5rem',
 	},
+	form: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	field: {
+		margin: theme.spacing(1),
+		width: 300,
+	},
+	loginButton: {
+		margin: theme.spacing(1),
+	},
 });
 
 const Header: React.FC = () => {
 	const classes = useStyles();
 
 	const [isDrawerOpen, setIsDrawerOpen] = React.useState<boolean>(false);
+	const [showModal, setShowModal] = React.useState<boolean>(false);
 
 	const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
 		if (
@@ -44,6 +59,8 @@ const Header: React.FC = () => {
 
 		setIsDrawerOpen(open);
 	};
+
+	const openModal = () => setShowModal(true);
 
 	return (
 		<header className={classes.root}>
@@ -66,10 +83,43 @@ const Header: React.FC = () => {
 							<a className={classes.title}>Matco</a>
 						</Link>
 						<SearchBar />
-						<Button color="inherit">Login</Button>
+						<Button onClick={openModal} color="inherit">
+							Login
+						</Button>
 					</Toolbar>
 				</Container>
 			</AppBar>
+			<ModalComponent
+				open={showModal}
+				handleClose={() => setShowModal(false)}
+				title="Login"
+				description="Login to see featured stuff"
+			>
+				<form className={classes.form} noValidate autoComplete="off">
+					<TextField
+						type="text"
+						className={classes.field}
+						id="outlined-basic"
+						label="Username"
+						variant="outlined"
+					/>
+					<TextField
+						type="password"
+						className={classes.field}
+						id="outlined-basic"
+						label="Password"
+						variant="outlined"
+					/>
+					<Button
+						variant="contained"
+						color="secondary"
+						className={classes.loginButton}
+						endIcon={<ExitToAppIcon />}
+					>
+						Login
+					</Button>
+				</form>
+			</ModalComponent>
 		</header>
 	);
 };
