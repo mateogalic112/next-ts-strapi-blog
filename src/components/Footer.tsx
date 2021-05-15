@@ -4,6 +4,7 @@ import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Box, Container, Typography } from '@material-ui/core';
+import SocialIcons from '../widgets/SocialIcons';
 
 const useStyles = makeStyles({
 	root: {
@@ -21,8 +22,11 @@ const Footer = () => {
 	return (
 		<Box component="div" py={4} className={classes.root}>
 			<Container className={classes.container}>
-				<Typography variant="subtitle1">Matco Corp &copy;</Typography>
-				<Typography variant="body2">All rights reserved {new Date().getFullYear()}.</Typography>
+				<div>
+					<Typography variant="body2">Matco Corp &copy;</Typography>
+					<Typography variant="subtitle2">All rights reserved {new Date().getFullYear()}.</Typography>
+				</div>
+				<SocialIcons />
 			</Container>
 		</Box>
 	);
