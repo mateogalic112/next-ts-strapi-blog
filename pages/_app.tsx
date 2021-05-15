@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 
+import { AuthProvider } from '../context/AuthContext';
+
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,7 +27,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				<Component {...pageProps} />
+				<AuthProvider>
+					<Component {...pageProps} />
+				</AuthProvider>
 			</ThemeProvider>
 		</>
 	);

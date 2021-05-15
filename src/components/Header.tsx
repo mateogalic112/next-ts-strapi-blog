@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
+
+import AuthContext, { ContextProps } from '../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 import AnimatedDrawer from '../widgets/AnimatedDrawer';
 import SearchBar from '../widgets/SearchBar';
@@ -45,8 +48,30 @@ const useStyles = makeStyles({
 const Header: React.FC = () => {
 	const classes = useStyles();
 
+	const { user, login, error } = useContext<ContextProps>(AuthContext);
+
 	const [isDrawerOpen, setIsDrawerOpen] = React.useState<boolean>(false);
 	const [showModal, setShowModal] = React.useState<boolean>(false);
+	const [loginData, setLoginData] = React.useState({
+		email: '',
+		password: '',
+	});
+
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+		}
+	}, [login]);
+
+	const handleLoginFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setLoginData({ ...loginData, [e.target.name]: e.target.value });
+	};
+
+	const handleLoginDataSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		login(loginData.email, loginData.password);
+		setShowModal(false);
+	};
 
 	const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
 		if (
@@ -65,6 +90,7 @@ const Header: React.FC = () => {
 	return (
 		<header className={classes.root}>
 			<AppBar position="static">
+				<ToastContainer />
 				<Container>
 					<Toolbar disableGutters>
 						<div className={classes.drawerDiv}>
@@ -83,6 +109,7 @@ const Header: React.FC = () => {
 							<a className={classes.title}>Matco</a>
 						</Link>
 						<SearchBar />
+						{user && <span>{user.username}</span>}
 						<Button onClick={openModal} color="inherit">
 							Login
 						</Button>
@@ -95,13 +122,15 @@ const Header: React.FC = () => {
 				title="Login"
 				description="Login to see featured stuff"
 			>
-				<form className={classes.form} noValidate autoComplete="off">
+				<form onSubmit={handleLoginDataSubmit} className={classes.form} noValidate autoComplete="off">
 					<TextField
-						type="text"
+						type="email"
 						className={classes.field}
 						id="outlined-basic"
-						label="Username"
+						label="Email"
 						variant="outlined"
+						name="email"
+						onChange={handleLoginFormChange}
 					/>
 					<TextField
 						type="password"
@@ -109,8 +138,11 @@ const Header: React.FC = () => {
 						id="outlined-basic"
 						label="Password"
 						variant="outlined"
+						name="password"
+						onChange={handleLoginFormChange}
 					/>
 					<Button
+						type="submit"
 						variant="contained"
 						color="secondary"
 						className={classes.loginButton}
