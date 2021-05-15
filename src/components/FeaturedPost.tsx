@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Post } from '../../models/Post';
 import Breadcrumb from '../../src/components/Breadcrumb';
@@ -40,6 +41,8 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
 
 	const dateOptions: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
+	const router = useRouter();
+
 	if (!post) return null;
 
 	return (
@@ -56,11 +59,13 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
 					<Typography gutterBottom variant="body2">
 						{new Date(post.published_at).toLocaleString('en-US', dateOptions)}
 					</Typography>
-					<Button size="small" color="secondary" endIcon={<ArrowForwardIcon />}>
-						<Link href={`/posts/${post.slug}`}>
-							<a>Read More</a>
-						</Link>
-					</Button>
+					{!router.pathname.includes('/posts/') && (
+						<Button size="small" color="secondary" endIcon={<ArrowForwardIcon />}>
+							<Link href={`/posts/${post.slug}`}>
+								<a>Read More</a>
+							</Link>
+						</Button>
+					)}
 				</Box>
 			</Box>
 		</Container>

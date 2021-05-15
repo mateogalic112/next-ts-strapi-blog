@@ -12,9 +12,10 @@ import ModalComponent from '../components/ModalComponent';
 import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AppBar, Toolbar, IconButton, Button, Container, TextField, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Container, TextField, Hidden } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import NavigationList from './NavigationList';
 
 const useStyles = makeStyles({
 	root: {
@@ -111,7 +112,10 @@ const Header: React.FC = () => {
 						<Link href="/">
 							<a className={classes.title}>Matco</a>
 						</Link>
-						<SearchBar />
+						<Hidden smDown>
+							<NavigationList />
+							<SearchBar />
+						</Hidden>
 						{user && <Button className={classes.white}>{user.username}</Button>}
 						{!user && (
 							<Button onClick={openModal} color="inherit">

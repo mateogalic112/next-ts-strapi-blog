@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import NavList from '../data/NavList';
 import { NavListType } from '../data/NavList';
-import { MailOutline } from '@material-ui/icons';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles({
 	list: {
@@ -26,7 +26,7 @@ const DrawerList: React.FC<DrawerListProps> = ({ toggleDrawer }) => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.list} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+		<div className={classes.list} role="presentation">
 			<List>
 				{NavList.map((item: NavListType) => {
 					return (
@@ -39,6 +39,7 @@ const DrawerList: React.FC<DrawerListProps> = ({ toggleDrawer }) => {
 					);
 				})}
 			</List>
+			<SearchBar />
 		</div>
 	);
 };
