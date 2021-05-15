@@ -24,9 +24,7 @@ const Breadcrumb: React.FC = () => {
 	const router = useRouter();
 	const urls = router.asPath.toUpperCase().split('/');
 
-	console.log(urls);
-
-	if (urls.some((item) => item.includes('?PAGE'))) return <div></div>;
+	if (urls.some((item) => item.includes('?PAGE')) || urls.length < 3) return <div></div>;
 
 	return (
 		<Breadcrumbs

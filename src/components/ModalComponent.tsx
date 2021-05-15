@@ -40,7 +40,7 @@ const ModalComponent: React.FC<ModalProps> = ({ open, handleClose, title, descri
 
 	useEffect(() => {
 		setIsBrowser(true);
-	});
+	}, []);
 
 	const modalContent = open ? (
 		<Modal

@@ -12,7 +12,7 @@ import ModalComponent from '../components/ModalComponent';
 import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AppBar, Toolbar, IconButton, Button, Container, TextField } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Container, TextField, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -42,6 +42,9 @@ const useStyles = makeStyles({
 	},
 	loginButton: {
 		margin: theme.spacing(1),
+	},
+	white: {
+		color: 'white',
 	},
 });
 
@@ -109,10 +112,12 @@ const Header: React.FC = () => {
 							<a className={classes.title}>Matco</a>
 						</Link>
 						<SearchBar />
-						{user && <span>{user.username}</span>}
-						<Button onClick={openModal} color="inherit">
-							Login
-						</Button>
+						{user && <Button className={classes.white}>{user.username}</Button>}
+						{!user && (
+							<Button onClick={openModal} color="inherit">
+								Login
+							</Button>
+						)}
 					</Toolbar>
 				</Container>
 			</AppBar>
