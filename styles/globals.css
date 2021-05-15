@@ -47,7 +47,8 @@ blockquote p {
 	line-height: 1.6;
 }
 
-#single-wrapper ul {
+#single-wrapper ul,
+ol {
 	font-size: 1.125rem;
 	margin-bottom: 1.5rem;
 	letter-spacing: 0.25px;

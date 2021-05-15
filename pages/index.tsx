@@ -1,9 +1,11 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import { Post } from '../models/Post';
 
 import { API_URL } from '../config';
 
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Button } from '@material-ui/core';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import Layout from '../src/components/Layout';
 import Showcase from '../src/components/Showcase';
@@ -29,6 +31,12 @@ const HomePage: React.FC<HomePageProps> = ({ posts, children }) => {
 						<PostCard key={post.slug} post={post} />
 					))}
 				</Grid>
+				<VerticalSpacer />
+				<Button variant="contained" color="primary" endIcon={<ArrowForwardIosIcon />}>
+					<Link href="/posts">
+						<a>View All</a>
+					</Link>
+				</Button>
 			</Container>
 			<VerticalSpacer />
 		</Layout>
@@ -36,7 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts, children }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	const res = await fetch(`${API_URL}/posts?_limit=2`);
+	const res = await fetch(`${API_URL}/posts?_sort=published_at:ASC&_limit=3`);
 
 	const posts = await res.json();
 

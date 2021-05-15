@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import theme from '../../utils/theme';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Breadcrumbs, Typography } from '@material-ui/core';
@@ -14,6 +13,9 @@ const useStyles = makeStyles({
 		fontSize: '1rem',
 		color: 'white',
 	},
+	white: {
+		color: theme.palette.common.white,
+	},
 });
 
 const Breadcrumb: React.FC = () => {
@@ -22,11 +24,18 @@ const Breadcrumb: React.FC = () => {
 	const router = useRouter();
 	const urls = router.asPath.toUpperCase().split('/');
 
+	console.log(urls);
+
+	if (urls.some((item) => item.includes('?PAGE'))) return <div></div>;
+
 	return (
-		<Breadcrumbs separator={<NavigateNextIcon fontSize="small" color="secondary" />} aria-label="breadcrumb">
+		<Breadcrumbs
+			separator={<NavigateNextIcon fontSize="small" className={classes.white} />}
+			aria-label="breadcrumb"
+		>
 			{urls.length > 0 &&
 				urls.slice(1, urls.length - 1).map((url) => (
-					<Link href={`/${url}`} replace>
+					<Link href={`/${url.toLowerCase()}`} key={url}>
 						<a className={classes.link}>{url}</a>
 					</Link>
 				))}

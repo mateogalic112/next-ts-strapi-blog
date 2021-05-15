@@ -25,11 +25,15 @@ const PostCard: React.FC<SinglePostProps> = ({ post }) => {
 		<Grid item xs={12} sm={6} md={4}>
 			<Card className={classes.root}>
 				<CardActionArea>
-					<CardMedia
-						className={classes.media}
-						image={post.featured_image.formats.medium.url}
-						title={post.slug}
-					/>
+					<Link href={`/posts/${post.slug}`}>
+						<a>
+							<CardMedia
+								className={classes.media}
+								image={post.featured_image.formats.medium.url}
+								title={post.slug}
+							/>
+						</a>
+					</Link>
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="h2">
 							{post.title}
