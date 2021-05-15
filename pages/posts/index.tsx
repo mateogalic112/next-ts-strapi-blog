@@ -14,7 +14,7 @@ import { Container, Grid } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import FeaturedPost from '../../src/components/FeaturedPost';
 
-const PER_PAGE = 2;
+const PER_PAGE = 4;
 interface PostsProps {
 	posts: Post[];
 	total: number;

@@ -116,7 +116,13 @@ const Header: React.FC = () => {
 							<NavigationList />
 							<SearchBar />
 						</Hidden>
-						{user && <Button className={classes.white}>{user.username}</Button>}
+						{user && (
+							<Link href="/profile">
+								<Button className={classes.white}>
+									<a>{user.username}</a>
+								</Button>
+							</Link>
+						)}
 						{!user && (
 							<Button onClick={openModal} color="inherit">
 								Login
