@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-import { useRouter } from 'next/router';
-
 import { NEXT_URL } from '../config';
 
 import { User } from '../models/User';
@@ -66,7 +64,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 		}
 	};
 
-	const logout = async () => {};
+	const logout = async () => {
+		const res = await fetch(`${NEXT_URL}/api/logout`, {
+			method: 'POST',
+		});
+
+		if (res.ok) {
+			setUser(null);
+		}
+	};
 
 	return <AuthContext.Provider value={{ user, error, login, logout, userInfo }}>{children}</AuthContext.Provider>;
 };
