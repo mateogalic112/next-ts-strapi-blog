@@ -8,7 +8,7 @@ export type ContextProps = {
 	user: User | null;
 	error: String | null;
 	login: LoginUser;
-	userInfo: (user: User) => void;
+	userInfo: () => void;
 	logout: () => void;
 };
 
@@ -16,7 +16,7 @@ const AuthContext = createContext<ContextProps>({
 	user: null,
 	error: null,
 	login: () => {},
-	userInfo: (user: User) => {},
+	userInfo: () => {},
 	logout: () => {},
 });
 
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	const [error, setError] = useState<String | null>(null);
 
 	useEffect(() => {
-		userInfo(user);
+		userInfo();
 	}, []);
 
 	const login: LoginUser = async (identifier, password) => {
@@ -52,13 +52,13 @@ export const AuthProvider: React.FC = ({ children }) => {
 		}
 	};
 
-	const userInfo = async (user: User | null) => {
+	const userInfo = async () => {
 		const res = await fetch(`${NEXT_URL}/api/user`);
 
 		const data = await res.json();
 
 		if (res.ok) {
-			setError(data.user);
+			setUser(data.user);
 		} else {
 			setUser(null);
 		}

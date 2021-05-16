@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../context/AuthContext';
 import Link from 'next/link';
 
 import { Post } from '../../models/Post';
@@ -24,6 +24,8 @@ interface SinglePostProps {
 
 const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 	const classes = useStyles();
+
+	const { user } = useContext(AuthContext);
 
 	return (
 		<Grid item xs={12} sm={6} lg={4}>
@@ -54,7 +56,7 @@ const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 					<Link href={`/posts/${post.slug}`}>
 						<a>Read more</a>
 					</Link>
-					<LikeComponent postId={post.id} postName={post.title} likes={post.likes} token={token} />
+					<LikeComponent post={post} userId={user?.id} token={token} />
 				</CardActions>
 			</Card>
 		</Grid>
