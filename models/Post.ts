@@ -5,10 +5,12 @@ export interface Post {
 	content: string;
 	excerpt: string;
 	author: Author;
+	is_featured: boolean;
 	published_at: Date;
 	created_at: Date;
 	updated_at: Date;
 	featured_image: FeaturedImage;
+	likes: Like[];
 }
 
 export interface Author {
@@ -65,4 +67,13 @@ export interface Medium {
 export interface ProviderMetadata {
 	public_id: string;
 	resource_type: string;
+}
+
+export interface Like {
+	id: number;
+	user: number;
+	post: number;
+	published_at: Date;
+	created_at: Date;
+	updated_at: Date;
 }

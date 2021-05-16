@@ -12,10 +12,11 @@ import VerticalSpacer from '../../src/widgets/VerticalSpacer';
 import { Container, Grid, Typography } from '@material-ui/core';
 
 interface ProfilePageProps {
+	token: String;
 	posts: Post[];
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ posts }) => {
+const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 	const { user } = useContext(AuthContext);
 	return (
 		<Layout title="My Profile">
@@ -30,7 +31,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ posts }) => {
 				</Typography>
 				<Grid container spacing={5}>
 					{posts.map((post) => (
-						<PostCard key={post.slug} post={post} />
+						<PostCard key={post.slug} post={post} token={token} />
 					))}
 				</Grid>
 				<VerticalSpacer />
@@ -53,6 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
 	return {
 		props: {
+			token,
 			posts,
 		},
 	};

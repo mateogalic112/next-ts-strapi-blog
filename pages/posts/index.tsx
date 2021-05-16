@@ -13,15 +13,17 @@ import VerticalSpacer from '../../src/widgets/VerticalSpacer';
 import { Container, Grid } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import FeaturedPost from '../../src/components/FeaturedPost';
+import parseCookie from '../../helpers/cookie';
 
 const PER_PAGE = 4;
 interface PostsProps {
+	token: String;
 	posts: Post[];
 	total: number;
 	page: number;
 }
 
-const PostsPage: React.FC<PostsProps> = ({ posts, total, page }) => {
+const PostsPage: React.FC<PostsProps> = ({ token, posts, total, page }) => {
 	const router = useRouter();
 
 	const lastPage = Math.ceil(total / PER_PAGE);
@@ -37,7 +39,7 @@ const PostsPage: React.FC<PostsProps> = ({ posts, total, page }) => {
 			<Container>
 				<Grid container spacing={5}>
 					{posts.map((post) => (
-						<PostCard key={post.slug} post={post} />
+						<PostCard key={post.slug} post={post} token={token} />
 					))}
 				</Grid>
 				<VerticalSpacer />
@@ -48,8 +50,9 @@ const PostsPage: React.FC<PostsProps> = ({ posts, total, page }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 	const { page = 1 } = query;
+	const { token } = parseCookie(req);
 
 	const start = Number(page) === 1 ? 0 : (Number(page) - 1) * PER_PAGE;
 
@@ -77,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 			posts,
 			page: Number(page),
 			total,
+			token,
 		},
 	};
 };

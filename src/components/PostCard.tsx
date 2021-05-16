@@ -1,10 +1,12 @@
 import React from 'react';
+
 import Link from 'next/link';
 
 import { Post } from '../../models/Post';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import LikeComponent from './LikeComponent';
 
 const useStyles = makeStyles({
 	root: {
@@ -17,10 +19,12 @@ const useStyles = makeStyles({
 
 interface SinglePostProps {
 	post: Post;
+	token: String;
 }
 
-const PostCard: React.FC<SinglePostProps> = ({ post }) => {
+const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 	const classes = useStyles();
+
 	return (
 		<Grid item xs={12} sm={6} lg={4}>
 			<Card className={classes.root}>
@@ -50,6 +54,7 @@ const PostCard: React.FC<SinglePostProps> = ({ post }) => {
 					<Link href={`/posts/${post.slug}`}>
 						<a>Read more</a>
 					</Link>
+					<LikeComponent postId={post.id} postName={post.title} likes={post.likes} token={token} />
 				</CardActions>
 			</Card>
 		</Grid>
