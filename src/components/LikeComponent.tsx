@@ -1,13 +1,12 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { Paper, Fade, Popper, Button, Typography } from '@material-ui/core';
 
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import { Post } from '../../models/Post';
+
 import { API_URL } from '../../config';
-import { Router } from '@material-ui/icons';
 
 interface LikeComponentProps {
 	post: Post;
@@ -16,8 +15,6 @@ interface LikeComponentProps {
 }
 
 const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) => {
-	const router = useRouter();
-
 	const liked = !!post.likes.find((item) => item.user === userId);
 
 	const like = async () => {
@@ -40,7 +37,6 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			}
 			toast.error('Something Went Wrong');
 		} else {
-			router.reload();
 			toast.success(`Post "${post.title}" liked`);
 		}
 	};
@@ -60,7 +56,6 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			}
 			toast.error('Something Went Wrong');
 		} else {
-			router.reload();
 			toast.success(`Post "${post.title}" unliked`);
 		}
 	};
