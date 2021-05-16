@@ -20,10 +20,8 @@ const NavigationList = () => {
 	return (
 		<Box component="div" p={1} display="flex">
 			{NavList.map((item) => (
-				<Link href={item.url} passHref>
-					<Button className={classes.white}>
-						<a>{item.name}</a>
-					</Button>
+				<Link key={item.name} href={item.url} passHref>
+					<Button className={classes.white}>{item.name}</Button>
 				</Link>
 			))}
 		</Box>

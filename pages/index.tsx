@@ -35,9 +35,9 @@ const HomePage: React.FC<HomePageProps> = ({ token, posts, children }) => {
 					))}
 				</Grid>
 				<VerticalSpacer />
-				<Link href="/posts" passHref>
+				<Link href="/posts">
 					<Button variant="contained" color="primary" endIcon={<ArrowForwardIosIcon />}>
-						<a>View All</a>
+						View All
 					</Button>
 				</Link>
 			</Container>

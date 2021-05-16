@@ -60,11 +60,11 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
 						{new Date(post.published_at).toLocaleString('en-US', dateOptions)}
 					</Typography>
 					{!router.pathname.includes('/posts/') && (
-						<Button size="small" color="secondary" endIcon={<ArrowForwardIcon />}>
-							<Link href={`/posts/${post.slug}`}>
-								<a>Read More</a>
-							</Link>
-						</Button>
+						<Link href={`/posts/${post.slug}`}>
+							<Button size="small" color="secondary" endIcon={<ArrowForwardIcon />}>
+								Read More
+							</Button>
+						</Link>
 					)}
 				</Box>
 			</Box>

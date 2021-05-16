@@ -117,10 +117,8 @@ const Header: React.FC = () => {
 							<SearchBar />
 						</Hidden>
 						{user && (
-							<Link href="/profile">
-								<Button className={classes.white}>
-									<a>{user.username}</a>
-								</Button>
+							<Link href="/profile" passHref>
+								<Button className={classes.white}>{user.username}</Button>
 							</Link>
 						)}
 						{!user && (

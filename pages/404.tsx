@@ -29,9 +29,7 @@ const NotFoundPage: React.FC = () => {
 					Page not found
 				</Typography>
 				<Link href="/" passHref>
-					<Button color="primary">
-						<a>Back to home</a>
-					</Button>
+					<Button color="primary">Back to home</Button>
 				</Link>
 			</Container>
 			<VerticalSpacer />

@@ -18,11 +18,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		const strapiRes = await fetch(`${API_URL}/users/me`, {
 			method: 'GET',
 			headers: {
-				Authorization: `Beared ${token}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 
 		const user = await strapiRes.json();
+		console.log(user);
 
 		if (strapiRes.ok) {
 			res.status(200).json({ user });
