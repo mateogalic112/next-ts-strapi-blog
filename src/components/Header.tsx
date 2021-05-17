@@ -91,7 +91,7 @@ const Header: React.FC = () => {
 	return (
 		<header>
 			<AppBar position="static">
-				<ToastContainer />
+				<ToastContainer autoClose={3000} />
 				<Container>
 					<Toolbar disableGutters>
 						<div className={classes.drawerDiv}>

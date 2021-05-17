@@ -80,7 +80,7 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 			{userId && (
 				<Button onClick={isLiked ? dislike : like} size="small" color={isLiked ? 'primary' : 'secondary'}>
 					{isLiked ? 'Dislike' : 'Like'}
