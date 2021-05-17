@@ -18,9 +18,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NavigationList from './NavigationList';
 
 const useStyles = makeStyles({
-	root: {
-		flexGrow: 1,
-	},
 	menuButton: {
 		marginRight: theme.spacing(2),
 	},
@@ -92,7 +89,7 @@ const Header: React.FC = () => {
 	const openModal = () => setShowModal(true);
 
 	return (
-		<header className={classes.root}>
+		<header>
 			<AppBar position="static">
 				<ToastContainer />
 				<Container>

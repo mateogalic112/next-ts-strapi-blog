@@ -55,3 +55,9 @@ ol {
 	line-height: 1.6;
 	align-self: flex-start;
 }
+
+#__next {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}

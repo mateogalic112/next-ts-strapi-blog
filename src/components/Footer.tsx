@@ -20,15 +20,15 @@ const Footer = () => {
 	const classes = useStyles();
 
 	return (
-		<Box component="div" py={4} className={classes.root}>
-			<Container className={classes.container}>
-				<div>
+		<footer>
+			<Box component="div" py={4} className={classes.root}>
+				<Container className={classes.container}>
 					<Typography variant="body2">Matco Corp &copy;</Typography>
 					<Typography variant="subtitle2">All rights reserved {new Date().getFullYear()}.</Typography>
-				</div>
-				<SocialIcons />
-			</Container>
-		</Box>
+					<SocialIcons />
+				</Container>
+			</Box>
+		</footer>
 	);
 };
 

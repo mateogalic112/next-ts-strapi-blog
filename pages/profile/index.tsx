@@ -20,7 +20,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 	const { user } = useContext(AuthContext);
 	return (
 		<Layout title="My Profile">
-			<Container maxWidth="sm">
+			<Container>
 				<VerticalSpacer />
 				<Typography gutterBottom variant="h5">
 					{user?.username}

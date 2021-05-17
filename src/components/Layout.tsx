@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ title, keywords, description, children 
 				<meta name="keywords" content={keywords} />
 			</Head>
 			<Header />
-			{children}
+			<div style={{ flexGrow: 1 }}>{children}</div>
 			<Footer />
 		</>
 	);
