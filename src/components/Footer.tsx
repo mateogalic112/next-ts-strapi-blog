@@ -23,8 +23,10 @@ const Footer = () => {
 		<footer>
 			<Box component="div" py={4} className={classes.root}>
 				<Container className={classes.container}>
-					<Typography variant="body2">Matco Corp &copy;</Typography>
-					<Typography variant="subtitle2">All rights reserved {new Date().getFullYear()}.</Typography>
+					<Box component="div">
+						<Typography variant="body2">Matco Corp &copy;</Typography>
+						<Typography variant="subtitle2">All rights reserved {new Date().getFullYear()}.</Typography>
+					</Box>
 					<SocialIcons />
 				</Container>
 			</Box>
