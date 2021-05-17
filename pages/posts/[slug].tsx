@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetServerSideProps } from 'next';
 import ReactMarkdown from 'react-markdown';
 
 import { API_URL } from '../../config';
@@ -33,20 +33,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ post }) => {
 	);
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const res = await fetch(`${API_URL}/posts`);
-	const posts: Post[] = await res.json();
-
-	const paths = posts.map((post) => ({
-		params: { slug: post.slug },
-	}));
-	return {
-		paths,
-		fallback: false,
-	};
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	const res = await fetch(`${API_URL}/posts?slug=${params?.slug}`);
 	const post: Post[] = await res.json();
 

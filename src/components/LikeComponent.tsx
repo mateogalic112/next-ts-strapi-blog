@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import LikesContext from '../../context/LikeContext';
+
 import { ToastContainer, toast } from 'react-toastify';
 
 import { Paper, Fade, Popper, Button, Typography } from '@material-ui/core';
@@ -15,7 +17,19 @@ interface LikeComponentProps {
 }
 
 const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) => {
-	const liked = !!post.likes.find((item) => item.user === userId);
+	const { loadLikesGiven, likesGiven, getLikesByPost } = useContext(LikesContext);
+
+	const [likesCount, setLikesCount] = useState(0);
+
+	const setLikeFunc = async () => {
+		return await getLikesByPost(post.id).then((result) => result.length);
+	};
+
+	const isLiked = !!likesGiven.find((like) => like.post.id === post.id);
+
+	useEffect(() => {
+		setLikeFunc().then((r) => setLikesCount(r));
+	}, [isLiked]);
 
 	const like = async () => {
 		const res = await fetch(`${API_URL}/likes`, {
@@ -37,6 +51,8 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			}
 			toast.error('Something Went Wrong');
 		} else {
+			loadLikesGiven(userId);
+			getLikesByPost(post.id);
 			toast.success(`Post "${post.title}" liked`);
 		}
 	};
@@ -56,6 +72,8 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			}
 			toast.error('Something Went Wrong');
 		} else {
+			loadLikesGiven(userId);
+			getLikesByPost(post.id);
 			toast.success(`Post "${post.title}" unliked`);
 		}
 	};
@@ -64,15 +82,15 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 		<>
 			<ToastContainer />
 			{userId && (
-				<Button onClick={liked ? dislike : like} size="small" color={liked ? 'primary' : 'secondary'}>
-					{liked ? 'Dislike' : 'Like'}
+				<Button onClick={isLiked ? dislike : like} size="small" color={isLiked ? 'primary' : 'secondary'}>
+					{isLiked ? 'Dislike' : 'Like'}
 				</Button>
 			)}
 			<PopupState variant="popper" popupId="demo-popup-popper">
 				{(popupState) => (
 					<div>
 						<Button size="small" variant="outlined" color="primary" {...bindToggle(popupState)}>
-							Likes: {post.likes.length}
+							Likes: {likesCount}
 						</Button>
 						<Popper {...bindPopper(popupState)} transition>
 							{({ TransitionProps }) => (

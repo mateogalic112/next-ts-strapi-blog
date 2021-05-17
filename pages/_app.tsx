@@ -10,6 +10,7 @@ import '../styles/globals.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../utils/theme';
+import { LikesProvider } from '../context/LikeContext';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 	useEffect(() => {
@@ -28,7 +29,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<AuthProvider>
-					<Component {...pageProps} />
+					<LikesProvider>
+						<Component {...pageProps} />
+					</LikesProvider>
 				</AuthProvider>
 			</ThemeProvider>
 		</>
