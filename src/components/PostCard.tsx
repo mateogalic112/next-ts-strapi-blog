@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 interface SinglePostProps {
 	post: Post;
-	token: String;
+	token: String | undefined;
 }
 
 const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {

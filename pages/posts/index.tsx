@@ -52,7 +52,12 @@ const PostsPage: React.FC<PostsProps> = ({ token, posts, total, page }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
 	const { page = 1 } = query;
-	const { token } = parseCookie(req);
+	let cookieToken;
+	if (parseCookie(req)?.token) {
+		cookieToken = parseCookie(req).token;
+	} else {
+		cookieToken = '';
+	}
 
 	const start = Number(page) === 1 ? 0 : (Number(page) - 1) * PER_PAGE;
 
@@ -80,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
 			posts,
 			page: Number(page),
 			total,
-			token,
+			token: cookieToken,
 		},
 	};
 };

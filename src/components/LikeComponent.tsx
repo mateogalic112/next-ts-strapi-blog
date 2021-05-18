@@ -12,7 +12,7 @@ import { API_URL } from '../../config';
 
 interface LikeComponentProps {
 	post: Post;
-	token: String;
+	token: String | undefined;
 	userId: Number | undefined;
 }
 

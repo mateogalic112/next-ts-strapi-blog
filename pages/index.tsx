@@ -15,7 +15,7 @@ import VerticalSpacer from '../src/widgets/VerticalSpacer';
 import PostCard from '../src/components/PostCard';
 
 interface HomePageProps {
-	token: String;
+	token: String | undefined;
 	posts: Post[];
 }
 
@@ -48,14 +48,19 @@ const HomePage: React.FC<HomePageProps> = ({ token, posts, children }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 	const res = await fetch(`${API_URL}/posts?_sort=published_at:ASC&_limit=3`);
-	const { token } = parseCookie(req);
+	let cookieToken;
+	if (parseCookie(req)?.token) {
+		cookieToken = parseCookie(req).token;
+	} else {
+		cookieToken = '';
+	}
 
 	const posts = await res.json();
 
 	return {
 		props: {
 			posts,
-			token,
+			token: cookieToken,
 		},
 	};
 };

@@ -41,12 +41,17 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-	const { token } = parseCookie(req);
+	let cookieToken;
+	if (parseCookie(req)?.token) {
+		cookieToken = parseCookie(req).token;
+	} else {
+		cookieToken = '';
+	}
 
 	const res = await fetch(`${API_URL}/posts/me`, {
 		method: 'GET',
 		headers: {
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${cookieToken}`,
 		},
 	});
 
@@ -54,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
 	return {
 		props: {
-			token,
+			token: cookieToken,
 			posts,
 		},
 	};
