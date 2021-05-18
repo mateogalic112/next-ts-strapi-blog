@@ -25,7 +25,7 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 		return await getLikesByPost(post.id).then((result) => result.length);
 	};
 
-	const isLiked = !!likesGiven.find((like) => like.post.id === post.id);
+	const isLiked = !!likesGiven.find((like) => like.user.id === userId && like.post.id === post.id);
 
 	useEffect(() => {
 		setLikeFunc().then((r) => setLikesCount(r));
