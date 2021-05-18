@@ -16,6 +16,7 @@ import { AppBar, Toolbar, IconButton, Button, Container, TextField, Hidden } fro
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NavigationList from './NavigationList';
+import UserPopover from './UserPopover';
 
 const useStyles = makeStyles({
 	menuButton: {
@@ -113,11 +114,7 @@ const Header: React.FC = () => {
 							<NavigationList />
 							<SearchBar />
 						</Hidden>
-						{user && (
-							<Link href="/profile" passHref>
-								<Button className={classes.white}>{user.username}</Button>
-							</Link>
-						)}
+						{user && <UserPopover username={user.username} />}
 						{!user && (
 							<Button onClick={openModal} color="inherit">
 								Login
