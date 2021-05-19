@@ -25,7 +25,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 				<VerticalSpacer />
 				<Typography variant="h4">Profile</Typography>
 				<VerticalSpacer />
-				<UserInfo user={user} />
+				<UserInfo user={user} postCount={posts.length} />
 				<VerticalSpacer />
 				<Typography gutterBottom variant="h6">
 					My posts
