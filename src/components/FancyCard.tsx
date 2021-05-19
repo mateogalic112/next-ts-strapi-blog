@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import { FacebookShareButton, FacebookIcon } from 'react-share';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
@@ -63,7 +65,15 @@ const FancyCard: React.FC<FancyCardProps> = ({ post }) => {
 					month: 'long',
 				})}
 			/>
-			<CardMedia className={classes.media} image={post.featured_image.formats.small.url} title={post.slug} />
+			<Link href={`/posts/${post.slug}`}>
+				<a>
+					<CardMedia
+						className={classes.media}
+						image={post.featured_image.formats.small.url}
+						title={post.slug}
+					/>
+				</a>
+			</Link>
 			<CardContent>
 				<Typography variant="body2" color="textSecondary" component="p">
 					{post.excerpt}
@@ -74,7 +84,9 @@ const FancyCard: React.FC<FancyCardProps> = ({ post }) => {
 					<FavoriteIcon />
 				</IconButton>
 				<IconButton aria-label="share">
-					<ShareIcon />
+					<FacebookShareButton url="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">
+						<FacebookIcon size="25" round />
+					</FacebookShareButton>
 				</IconButton>
 			</CardActions>
 		</Card>

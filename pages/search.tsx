@@ -34,11 +34,7 @@ const Search: React.FC<SearchResults> = ({ posts }) => {
 				<Grid container spacing={5}>
 					{posts.map((post) => (
 						<Grid item key={post.id}>
-							<Link href={`/posts/${post.slug}`}>
-								<a>
-									<FancyCard post={post} />
-								</a>
-							</Link>
+							<FancyCard post={post} />
 						</Grid>
 					))}
 				</Grid>
