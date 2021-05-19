@@ -3,12 +3,13 @@ import LikesContext from '../../context/LikeContext';
 
 import { ToastContainer, toast } from 'react-toastify';
 
-import { Paper, Fade, Popper, Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
-import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import { Post } from '../../models/Post';
 
 import { API_URL } from '../../config';
+import ModalComponent from './ModalComponent';
+import { Like } from '../../models/Like';
 
 interface LikeComponentProps {
 	post: Post;
@@ -19,10 +20,13 @@ interface LikeComponentProps {
 const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) => {
 	const { loadLikesGiven, likesGiven, getLikesByPost } = useContext(LikesContext);
 
-	const [likesCount, setLikesCount] = useState(0);
+	const [showModal, setShowModal] = React.useState<boolean>(false);
+	const openModal = () => setShowModal(true);
+
+	const [likesCount, setLikesCount] = useState<Like[]>([]);
 
 	const setLikeFunc = async () => {
-		return await getLikesByPost(post.id).then((result) => result.length);
+		return await getLikesByPost(post.id);
 	};
 
 	const isLiked = !!likesGiven.find((like) => like.user.id === userId && like.post.id === post.id);
@@ -86,24 +90,25 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 					{isLiked ? 'Dislike' : 'Like'}
 				</Button>
 			)}
-			<PopupState variant="popper" popupId="demo-popup-popper">
-				{(popupState) => (
-					<div>
-						<Button size="small" variant="outlined" color="primary" {...bindToggle(popupState)}>
-							Likes: {likesCount}
-						</Button>
-						<Popper {...bindPopper(popupState)} transition>
-							{({ TransitionProps }) => (
-								<Fade {...TransitionProps} timeout={350}>
-									<Paper>
-										<Typography variant="subtitle1">The content of the Popper.</Typography>
-									</Paper>
-								</Fade>
-							)}
-						</Popper>
-					</div>
-				)}
-			</PopupState>
+			<Button
+				disabled={likesCount.length === 0}
+				onClick={openModal}
+				size="small"
+				variant="outlined"
+				color="primary"
+			>
+				Likes: {likesCount.length}
+			</Button>
+			<ModalComponent
+				open={showModal}
+				handleClose={() => setShowModal(false)}
+				title="Likes"
+				description="People that liked this"
+			>
+				{likesCount.map((like) => (
+					<p>{like.user.username}</p>
+				))}
+			</ModalComponent>
 		</>
 	);
 };

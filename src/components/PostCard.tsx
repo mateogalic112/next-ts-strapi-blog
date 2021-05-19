@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import Link from 'next/link';
 
+import { FacebookShareButton } from 'react-share';
 import { Post } from '../../models/Post';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import ShareIcon from '@material-ui/icons/Share';
+
 import LikeComponent from './LikeComponent';
 
 const useStyles = makeStyles({
@@ -49,10 +52,10 @@ const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 						</Typography>
 					</CardContent>
 				</CardActionArea>
-				<CardActions>
-					<Button size="small" color="primary">
-						Share
-					</Button>
+				<CardActions style={{ display: 'flex', alignItems: 'center' }}>
+					<FacebookShareButton style={{ margin: '0 .5rem', fontSize: '1rem' }} url="https://www.google.com">
+						<ShareIcon />
+					</FacebookShareButton>
 					<Link href={`/posts/${post.slug}`}>
 						<a>Read more</a>
 					</Link>
