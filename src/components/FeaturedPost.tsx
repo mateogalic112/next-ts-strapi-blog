@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import AuthContext from '../../context/AuthContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,6 +14,8 @@ import { Container, Typography, Box, Button } from '@material-ui/core';
 
 import CreateIcon from '@material-ui/icons/Create';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import LikeComponent from './LikeComponent';
+import VerticalSpacer from '../widgets/VerticalSpacer';
 
 const useStyles = makeStyles({
 	heroWrapper: { position: 'relative', width: '100%', minHeight: '50vh', paddingBottom: '20%' },
@@ -33,11 +37,14 @@ const useStyles = makeStyles({
 });
 
 interface FeaturedPostProps {
+	token: String;
 	post: Post | undefined;
 }
 
-const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
+const FeaturedPost: React.FC<FeaturedPostProps> = ({ post, token }) => {
 	const classes = useStyles();
+
+	const { user } = useContext(AuthContext);
 
 	const dateOptions: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -66,6 +73,8 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post }) => {
 							</Button>
 						</Link>
 					)}
+					<VerticalSpacer marginBottom="1rem" marginTop=".5rem" />
+					<LikeComponent post={post} userId={user?.id} token={token} />
 				</Box>
 			</Box>
 		</Container>

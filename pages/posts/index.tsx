@@ -34,7 +34,7 @@ const PostsPage: React.FC<PostsProps> = ({ token, posts, total, page }) => {
 
 	return (
 		<Layout>
-			<FeaturedPost post={posts.shift()} />
+			<FeaturedPost post={posts.shift()} token={token} />
 			<VerticalSpacer />
 			<Container>
 				<Grid container spacing={5}>
