@@ -10,6 +10,7 @@ import PostCard from '../../src/components/PostCard';
 import VerticalSpacer from '../../src/widgets/VerticalSpacer';
 
 import { Container, Grid, Typography } from '@material-ui/core';
+import UserInfo from '../../src/components/UserInfo';
 
 interface ProfilePageProps {
 	token: String;
@@ -22,9 +23,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 		<Layout title="My Profile">
 			<Container>
 				<VerticalSpacer />
-				<Typography gutterBottom variant="h5">
-					{user?.username}
-				</Typography>
+				<UserInfo user={user} />
 				<VerticalSpacer />
 				<Typography gutterBottom variant="h6">
 					My posts

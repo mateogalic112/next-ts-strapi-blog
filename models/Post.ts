@@ -1,3 +1,5 @@
+import { Avatar } from './User';
+
 export interface Post {
 	id: number;
 	title: string;
@@ -23,6 +25,7 @@ export interface Author {
 	role: number;
 	created_at: Date;
 	updated_at: Date;
+	avatar: Avatar;
 }
 
 export interface FeaturedImage {
