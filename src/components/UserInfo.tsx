@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import LikeContext from '../../context/LikeContext';
 import { User } from '../../models/User';
 import { getDaysDiff } from '../../helpers/date';
 
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const UserInfo: React.FC<UserInfo> = ({ user }) => {
 	const classes = useStyles();
+
+	const { likesGiven, likesReceived } = useContext(LikeContext);
+
 	return (
 		<>
 			<Box display="flex">
@@ -45,6 +48,26 @@ const UserInfo: React.FC<UserInfo> = ({ user }) => {
 					<Divider light />
 					<Typography gutterBottom variant="body2">
 						{user?.role?.name}
+					</Typography>
+				</Box>
+
+				<Box display="flex" flexDirection="column" className={classes.userInfo}>
+					<Typography gutterBottom variant="body1">
+						{likesGiven.length}
+					</Typography>
+					<Divider light />
+					<Typography gutterBottom variant="body2">
+						Likes given
+					</Typography>
+				</Box>
+
+				<Box display="flex" flexDirection="column" className={classes.userInfo}>
+					<Typography gutterBottom variant="body1">
+						{likesReceived.length}
+					</Typography>
+					<Divider light />
+					<Typography gutterBottom variant="body2">
+						Likes received
 					</Typography>
 				</Box>
 			</Box>

@@ -23,6 +23,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, posts }) => {
 		<Layout title="My Profile">
 			<Container>
 				<VerticalSpacer />
+				<Typography variant="h4">Profile</Typography>
+				<VerticalSpacer />
 				<UserInfo user={user} />
 				<VerticalSpacer />
 				<Typography gutterBottom variant="h6">

@@ -18,7 +18,7 @@ interface LikeComponentProps {
 }
 
 const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) => {
-	const { loadLikesGiven, likesGiven, getLikesByPost } = useContext(LikesContext);
+	const { loadLikesGiven, likesGiven, getLikesByPost, loadLikesReceived } = useContext(LikesContext);
 
 	const [showModal, setShowModal] = React.useState<boolean>(false);
 	const openModal = () => setShowModal(true);
@@ -56,6 +56,7 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			toast.error('Something Went Wrong');
 		} else {
 			loadLikesGiven(userId);
+			loadLikesReceived(userId);
 			getLikesByPost(post.id);
 			toast.success(`Post "${post.title}" liked`);
 		}
@@ -77,6 +78,7 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 			toast.error('Something Went Wrong');
 		} else {
 			loadLikesGiven(userId);
+			loadLikesReceived(userId);
 			getLikesByPost(post.id);
 			toast.success(`Post "${post.title}" unliked`);
 		}

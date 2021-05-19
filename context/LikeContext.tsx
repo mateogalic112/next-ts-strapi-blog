@@ -10,6 +10,7 @@ type LikesContextProps = {
 	likesReceived: Like[];
 	getLikesByPost: (postId: Number) => Promise<Like[]>;
 	loadLikesGiven: (userId: Number | undefined) => void;
+	loadLikesReceived: (userId: Number | undefined) => void;
 };
 
 const LikesContext = createContext<LikesContextProps>({
@@ -18,6 +19,7 @@ const LikesContext = createContext<LikesContextProps>({
 	likesReceived: [],
 	getLikesByPost: async (postId) => [],
 	loadLikesGiven: (userId) => {},
+	loadLikesReceived: (userId) => {},
 });
 
 export const LikesProvider: React.FC = ({ children }) => {
@@ -54,8 +56,8 @@ export const LikesProvider: React.FC = ({ children }) => {
 		}
 	};
 
-	const loadLikesReceived = async () => {
-		const res = await fetch(`${NEXT_URL}/api/likes/received/${user?.id}`);
+	const loadLikesReceived = async (userId: Number | undefined) => {
+		const res = await fetch(`${NEXT_URL}/api/likes/received/${userId}`);
 
 		const data = await res.json();
 
@@ -70,12 +72,14 @@ export const LikesProvider: React.FC = ({ children }) => {
 	useEffect(() => {
 		if (user) {
 			loadLikesGiven(user?.id);
-			loadLikesReceived();
+			loadLikesReceived(user?.id);
 		}
 	}, [user]);
 
 	return (
-		<LikesContext.Provider value={{ error, likesGiven, likesReceived, loadLikesGiven, getLikesByPost }}>
+		<LikesContext.Provider
+			value={{ error, likesGiven, likesReceived, loadLikesGiven, loadLikesReceived, getLikesByPost }}
+		>
 			{children}
 		</LikesContext.Provider>
 	);
