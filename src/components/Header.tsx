@@ -6,17 +6,18 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import AnimatedDrawer from '../widgets/AnimatedDrawer';
 import SearchBar from '../widgets/SearchBar';
-
+import NavigationList from './NavigationList';
+import UserPopover from './UserPopover';
 import ModalComponent from '../components/ModalComponent';
 
 import theme from '../../utils/theme';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { AppBar, Toolbar, IconButton, Button, Container, TextField, Hidden } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button, Container, TextField, Hidden, Box, Badge } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NavigationList from './NavigationList';
-import UserPopover from './UserPopover';
 
 const useStyles = makeStyles({
 	menuButton: {
@@ -114,7 +115,21 @@ const Header: React.FC = () => {
 							<NavigationList />
 							<SearchBar />
 						</Hidden>
-						{user && <UserPopover username={user.username} />}
+						{user && (
+							<Box display="flex" alignItems="center">
+								<UserPopover username={user.username} />
+								<IconButton aria-label="inbox">
+									<Badge badgeContent={4} color="secondary" invisible={false}>
+										<MailIcon />
+									</Badge>
+								</IconButton>
+								<IconButton aria-label="inbox">
+									<Badge badgeContent={4} color="secondary" invisible={false}>
+										<NotificationsIcon />
+									</Badge>
+								</IconButton>
+							</Box>
+						)}
 						{!user && (
 							<Button onClick={openModal} color="inherit">
 								Login
