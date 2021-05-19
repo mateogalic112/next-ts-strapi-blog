@@ -10,6 +10,7 @@ import VerticalSpacer from '../../src/widgets/VerticalSpacer';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import FeaturedPost from '../../src/components/FeaturedPost';
+import parseCookie from '../../helpers/cookie';
 
 const useStyles = makeStyles({
 	container: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
@@ -17,14 +18,15 @@ const useStyles = makeStyles({
 
 interface SinglePostProps {
 	post: Post;
+	token: String;
 }
 
-const SinglePost: React.FC<SinglePostProps> = ({ post }) => {
+const SinglePost: React.FC<SinglePostProps> = ({ post, token }) => {
 	const classes = useStyles();
 
 	return (
 		<Layout title={post.title}>
-			<FeaturedPost post={post} />
+			<FeaturedPost post={post} token={token} />
 			<VerticalSpacer />
 			<Container maxWidth="sm" className={classes.container} id="single-wrapper">
 				<ReactMarkdown>{post.content}</ReactMarkdown>
@@ -33,13 +35,21 @@ const SinglePost: React.FC<SinglePostProps> = ({ post }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 	const res = await fetch(`${API_URL}/posts?slug=${params?.slug}`);
 	const post: Post[] = await res.json();
+
+	let cookieToken;
+	if (parseCookie(req)?.token) {
+		cookieToken = parseCookie(req).token;
+	} else {
+		cookieToken = '';
+	}
 
 	return {
 		props: {
 			post: post[0],
+			token: cookieToken,
 		},
 	};
 };
