@@ -61,7 +61,7 @@ const FeaturedPost: React.FC<FeaturedPostProps> = ({ post, token }) => {
 				<Box>
 					<Typography gutterBottom variant="subtitle1">
 						<CreateIcon color="primary" />
-						{post.author.username}
+						{post.author?.username}
 					</Typography>
 					<Typography gutterBottom variant="body2">
 						{new Date(post.published_at).toLocaleString('en-US', dateOptions)}

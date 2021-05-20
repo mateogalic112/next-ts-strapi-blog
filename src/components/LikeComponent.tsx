@@ -108,7 +108,7 @@ const LikeComponent: React.FC<LikeComponentProps> = ({ post, userId, token }) =>
 				description="People that liked this"
 			>
 				{likesCount.map((like) => (
-					<p>{like.user.username}</p>
+					<p key={like.user?.id}>{like.user.username}</p>
 				))}
 			</ModalComponent>
 		</>
