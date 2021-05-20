@@ -2,7 +2,7 @@ import cookie from 'cookie';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'GET') {
@@ -14,8 +14,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 
 		const { token } = cookie.parse(req.headers.cookie);
+		const { id } = req.query;
 
-		const strapiRes = await fetch(`${API_URL}/users/me`, {
+		const strapiRes = await fetch(`${API_URL}/users/${id}`, {
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${token}`,
