@@ -60,7 +60,7 @@ const Showcase = () => {
 
 	const handleEmailDataSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		login(...emailData);
+		//login(...emailData);
 		setShowModal(false);
 	};
 
