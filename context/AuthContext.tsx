@@ -28,7 +28,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 	useEffect(() => {
 		userInfo(user?.id);
-	}, []);
+	}, [user]);
 
 	const login: LoginUser = async (identifier, password) => {
 		const res = await fetch(`${NEXT_URL}/api/login`, {

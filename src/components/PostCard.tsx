@@ -6,8 +6,20 @@ import { FacebookShareButton } from 'react-share';
 import { Post } from '../../models/Post';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import {
+	Grid,
+	Box,
+	Card,
+	CardActionArea,
+	CardActions,
+	CardContent,
+	CardMedia,
+	IconButton,
+	Typography,
+	Tooltip,
+} from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import LikeComponent from './LikeComponent';
 
@@ -52,6 +64,14 @@ const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 						</Typography>
 					</CardContent>
 				</CardActionArea>
+				<Box display="flex" alignItems="center" mb={1} ml={2}>
+					<Tooltip title={`Follow ${post.author?.username}`}>
+						<IconButton size="small" color="primary" aria-label="follow user" component="span">
+							<AddCircleIcon />
+						</IconButton>
+					</Tooltip>
+					<Typography variant="body2">{post.author?.username}</Typography>
+				</Box>
 				<CardActions style={{ display: 'flex', alignItems: 'center' }}>
 					<FacebookShareButton style={{ margin: '0 .5rem', fontSize: '1rem' }} url="https://www.google.com">
 						<ShareIcon />
