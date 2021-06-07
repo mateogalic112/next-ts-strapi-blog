@@ -65,12 +65,16 @@ const PostCard: React.FC<SinglePostProps> = ({ post, token }) => {
 					</CardContent>
 				</CardActionArea>
 				<Box display="flex" alignItems="center" mb={1} ml={2}>
-					<Tooltip title={`Follow ${post.author?.username}`}>
-						<IconButton size="small" color="primary" aria-label="follow user" component="span">
-							<AddCircleIcon />
-						</IconButton>
-					</Tooltip>
-					<Typography variant="body2">{post.author?.username}</Typography>
+					{user && user.username !== post.author?.username && (
+						<Tooltip title={`Follow ${post.author?.username}`}>
+							<IconButton size="small" color="primary" aria-label="follow user" component="span">
+								<AddCircleIcon />
+							</IconButton>
+						</Tooltip>
+					)}
+					{user?.username !== post.author?.username && (
+						<Typography variant="body2">{post.author?.username}</Typography>
+					)}
 				</Box>
 				<CardActions style={{ display: 'flex', alignItems: 'center' }}>
 					<FacebookShareButton style={{ margin: '0 .5rem', fontSize: '1rem' }} url="https://www.google.com">
